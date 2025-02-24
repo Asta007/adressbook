@@ -12,6 +12,10 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 
     @Bean
+
+    // HALTE : this function works just find, these red line are alert saying that
+    // those method are depricated but this does not affect the code..... for now
+
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests()
