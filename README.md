@@ -44,7 +44,7 @@ spring.jpa.show-sql=true
 ## 🛠️ Open Api
 
 L'application expose une API REST permettant de gérer une entité (ex. : `Contact`).
-> **http://localhost:8080/swagger-ui/index.html**
+> **[Acceder a Swagger](http://localhost:8080/swagger-ui/index.html)**
 
 | Méthode  | Endpoint         | Description                       |
 |----------|-----------------|-----------------------------------|
@@ -54,7 +54,6 @@ L'application expose une API REST permettant de gérer une entité (ex. : `Conta
 | `PUT`    | `/contacts/{id}` | Mettre à jour un contact        |
 | `DELETE` | `/contacts/{id}` | Supprimer un contact            |
 
-Les requêtes `POST` et `PUT` Json
 ```json
 {
   "firstName": "Emma",
@@ -81,10 +80,11 @@ docker compose -f .\docker-compose-keycloack.yml up -d
 ````
 ### Keycloack User
 > Odd / Odd@lyoko.com / Lyoko123
+
 > Jeremy / jeremy@lyoko.com / Lyoko123
 
 ### Keycloack Token link
-> **http://localhost:8081/realms/ISI_Spring/protocol/openid-connect/token**
+> **[Obtenir son token](http://localhost:8081/realms/ISI_Spring/protocol/openid-connect/token)**
 
 ### keycloack Link param
 
