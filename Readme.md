@@ -19,22 +19,19 @@ L'application est développée avec **Spring Boot** et utilise **Spring Data JPA
 
 ---
 
+## Concepts Implémentés
+
+- **CRUD Contact**
+- **Authentification Keycloak**
+- **Gestion des Exception [ NotFound, AlreadyExist ]**
+- **Authentification Keycloak**
+- **Test Junit**
+
+---
+
 ## ⚙️ Installation et exécution
 
-### 📌 Prérequis
-Avant de lancer le projet, assure-toi d'avoir installé :
-
-- **JDK 17**
-- **Maven**
-- **SQL Server** (ou une base de données compatible avec les dépendances)
-
-### 📥 Cloner le projet
-```sh
-git clone https://github.com/ton-repo/adressbook.git
-cd adressbook
-```
-
-### 🛠️ Configuration de la base de données
+###  Configuration de la base de données
 Dans le fichier `application.properties` ou `application.yml`, configure ta connexion à la base de données :
 ```properties
 spring.datasource.url=jdbc:sqlserver://localhost:1433;databaseName=adressbook
@@ -44,17 +41,10 @@ spring.jpa.hibernate.ddl-auto=update
 spring.jpa.show-sql=true
 ```
 
-### ▶️ Lancer l'application
-Compile et exécute l'application avec Maven :
-```sh
-mvn spring-boot:run
-```
-
----
-
-## 🛠️ Fonctionnalités CRUD
+## 🛠️ Open Api
 
 L'application expose une API REST permettant de gérer une entité (ex. : `Contact`).
+> **http://localhost:8080/swagger-ui/index.html**
 
 | Méthode  | Endpoint         | Description                       |
 |----------|-----------------|-----------------------------------|
@@ -65,8 +55,6 @@ L'application expose une API REST permettant de gérer une entité (ex. : `Conta
 | `DELETE` | `/contacts/{id}` | Supprimer un contact            |
 
 Les requêtes `POST` et `PUT` Json
-
-### Contact
 ```json
 {
   "firstName": "Emma",
@@ -79,30 +67,37 @@ Les requêtes `POST` et `PUT` Json
 ```
 
 ---
+## Keycloak with Docker
 
-## ✅ Tests
-L'application intègre des tests unitaires et d'intégration. Pour les exécuter, lance :
-```sh
-mvn test
-```
 
----
+### Docker Command Keycloack
+````bash
+docker run -p 8080:8080 -e KC_BOOTSTRAP_ADMIN_USERNAME=admin -e KC_BOOTSTRAP_ADMIN_PASSWORD=admin quay.io/keycloak/keycloak:26.1.2 start-dev
+````
 
-## 📌 Méthodologies de codage appliquées
-Ce projet met en œuvre certaines bonnes pratiques et patterns vus en Master 2 :
+### Docker Compose Keycloack
+````bash
+docker compose -f .\docker-compose-keycloack.yml up -d
+````
+### Keycloack User
+> Odd / Odd@lyoko.com / Lyoko123
+> Jeremy / jeremy@lyoko.com / Lyoko123
 
-- **Architecture en couches (Controller, Service, Repository)**
-- **Utilisation de Lombok pour réduire le boilerplate code**
-- **Validation des données avec `@Valid` et `@NotNull`**
-- **Utilisation de `ResponseEntity` pour une meilleure gestion des réponses API**
-- **Gestion des exceptions avec `@ControllerAdvice`**
+### Keycloack Token link
+> **http://localhost:8081/realms/ISI_Spring/protocol/openid-connect/token**
 
----
+### keycloack Link param
 
-## 📜 Licence
-Projet développé à des fins éducatives.
+````json
+{
+  "grant_type" : "password",
+  "client_id" : "adressbook-client",
+  "username" : "odd",
+  "password" : "Lyoko123"
+}
+````
+### Ressources
 
----
+> * **Ali Bouali | Spring boot 3 Keycloak integration for beginners :** https://www.youtube.com/watch?v=vmEWywGzWbA
 
-Tu peux l’adapter selon ton besoin ! 😊 🚀
-
+> * **Coding With Armand | Sécurisez votre application avec Keycloak :** https://www.youtube.com/watch?v=Qah3Tc85rP4

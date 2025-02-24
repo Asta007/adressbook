@@ -19,8 +19,10 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests()
-                .requestMatchers("/").permitAll()
-                .anyRequest().authenticated();
+                //.requestMatchers("/","swagger-ui/*").permitAll()
+                .requestMatchers("/contact","/contact/*").authenticated()
+                //.anyRequest().authenticated();
+                .anyRequest().permitAll();
         http
                 .oauth2ResourceServer()
                 .jwt();
